@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+	<!-- 加载配置文件 -->
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="locations">
+			<list>
+				<value>classpath:conf/*.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<dubbo:application name="dubbo-demo-provider" owner="${owner}"
+		organization="${organization}" />
+
+	<dubbo:registry address="${zkAddr}" />
+
+	<dubbo:protocol name="dubbo" serialization="fastjson" />
+
+
+	<!-- 增加了默认的日志 ,增加一个过滤器，使用外部tomcat，注意端口和contextpath必须一致-->
+	<dubbo:protocol name="rest" port="9190"
+		contextpath="dubbo-demo-provider" server="servlet"
+		
+		extension="com.alibaba.dubbo.rpc.protocol.rest.support.LoggingFilter,
+					cn.yk.demo.util.filter.RespFilter"/>
+
+	<!-- 用于CAT打点的Dubbo过滤器 -->
+	<!--<dubbo:provider filter="CatDubboFilter"/>-->
+
+	<!-- dubbo 服务的一个小demo -->
+	<bean id="iDubboDemoRestServiceImpl"
+		  class="cn.yk.demo.service.facade.IDubboDemoRestServiceImpl"></bean>
+	<dubbo:service
+			interface="cn.yk.demo.api.service.facade.IDubboDemoRestService"
+			ref="iDubboDemoRestServiceImpl" protocol="rest" timeout="2000" connections="100"/>
+</beans>

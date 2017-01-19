@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.yk.demo.dao.userMapper" >
+  <resultMap id="BaseResultMap" type="cn.yk.demo.api.dto.User" >
+    <id column="userID" property="userid" jdbcType="INTEGER" />
+    <result column="userName" property="username" jdbcType="VARCHAR" />
+    <result column="userEmail" property="useremail" jdbcType="VARCHAR" />
+    <result column="userPassword" property="userpassword" jdbcType="VARCHAR" />
+    <result column="roleID" property="roleid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    userID, userName, userEmail, userPassword, roleID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where userID = #{userid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from user
+    where userID = #{userid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.yk.demo.api.dto.User" >
+    insert into user (userID, userName, userEmail, 
+      userPassword, roleID)
+    values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{useremail,jdbcType=VARCHAR}, 
+      #{userpassword,jdbcType=VARCHAR}, #{roleid,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.yk.demo.api.dto.User" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        userID,
+      </if>
+      <if test="username != null" >
+        userName,
+      </if>
+      <if test="useremail != null" >
+        userEmail,
+      </if>
+      <if test="userpassword != null" >
+        userPassword,
+      </if>
+      <if test="roleid != null" >
+        roleID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=INTEGER},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="useremail != null" >
+        #{useremail,jdbcType=VARCHAR},
+      </if>
+      <if test="userpassword != null" >
+        #{userpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="roleid != null" >
+        #{roleid,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.yk.demo.api.dto.User" >
+    update user
+    <set >
+      <if test="username != null" >
+        userName = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="useremail != null" >
+        userEmail = #{useremail,jdbcType=VARCHAR},
+      </if>
+      <if test="userpassword != null" >
+        userPassword = #{userpassword,jdbcType=VARCHAR},
+      </if>
+      <if test="roleid != null" >
+        roleID = #{roleid,jdbcType=INTEGER},
+      </if>
+    </set>
+    where userID = #{userid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.yk.demo.api.dto.User" >
+    update user
+    set userName = #{username,jdbcType=VARCHAR},
+      userEmail = #{useremail,jdbcType=VARCHAR},
+      userPassword = #{userpassword,jdbcType=VARCHAR},
+      roleID = #{roleid,jdbcType=INTEGER}
+    where userID = #{userid,jdbcType=INTEGER}
+  </update>
+</mapper>

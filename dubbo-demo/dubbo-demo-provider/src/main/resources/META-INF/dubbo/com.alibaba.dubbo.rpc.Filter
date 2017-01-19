@@ -1,0 +1,2 @@
+# 配置dubbo的filter,用于CAT打点
+CatDubboFilter=cn.yk.demo.util.CatDubboFilter

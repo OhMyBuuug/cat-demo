@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: javax.cache:cache-api:1.0.0-PFD">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../../apache-maven-3.3.9/data/MyBBS/javax/cache/cache-api/1.0.0-PFD/cache-api-1.0.0-PFD.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/../../../apache-maven-3.3.9/data/MyBBS/javax/cache/cache-api/1.0.0-PFD/cache-api-1.0.0-PFD-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../../apache-maven-3.3.9/data/MyBBS/javax/cache/cache-api/1.0.0-PFD/cache-api-1.0.0-PFD-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

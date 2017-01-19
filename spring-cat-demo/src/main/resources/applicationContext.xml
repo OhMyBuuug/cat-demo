@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <!-- 自动扫描该包，使SpringMVC认为包下用了@Controller注解的类是控制器 -->
+    <context:component-scan base-package="cn.yk.demo.*">
+        <!--<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />-->
+    </context:component-scan>
+
+    <!-- 启动SpringMVC的注解功能，完成请求和注解POJO的映射 -->
+    <mvc:annotation-driven>
+        <mvc:async-support default-timeout="30000"></mvc:async-support>
+    </mvc:annotation-driven>
+
+    <!-- CAT 监控用拦截器 -->
+    <!--<mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**"/>
+            <bean class="CatSpringInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>-->
+</beans>
