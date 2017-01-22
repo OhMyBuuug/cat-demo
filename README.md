@@ -1,3 +1,3 @@
 # cat-demo
-CAT与Spring,Dubbo,Mybatis整合的示例
+CAT大众点评与Spring,Dubbox,Mybatis整合的示例
 
