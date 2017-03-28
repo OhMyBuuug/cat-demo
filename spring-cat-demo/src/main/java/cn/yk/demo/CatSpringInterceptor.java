@@ -47,15 +47,19 @@ public class CatSpringInterceptor implements HandlerInterceptor {
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
         // 请求-页面渲染前
         Transaction pt = pageLocal.get();
+        if (pt!=null){
+            pt.setStatus(Transaction.SUCCESS);
+            pt.complete();
+        }
         pageLocal.remove(); // need remove
-        pt.setStatus(Transaction.SUCCESS);
-        pt.complete();
 
         // 总计
         Transaction t = tranLocal.get();
+        if(t!=null){
+            t.setStatus(Transaction.SUCCESS);
+            t.complete();
+        }
         tranLocal.remove(); // need remove
-        t.setStatus(Transaction.SUCCESS);
-        t.complete();
     }
 }
 
